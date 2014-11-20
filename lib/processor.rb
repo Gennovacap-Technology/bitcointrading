@@ -9,7 +9,7 @@ class Processor < Server
   def self.run!(options)
     Server.new(options).run! do
       EM.run do
-        pg = PG.connect(dbname: 'okcoin', user: 'vagrant', password: 'vagrant')
+        pg = PG.connect(dbname: 'bitcoin_futures', user: 'postgres', password: 'postgres')
         pg.prepare('insert_data', 'INSERT INTO "data" ("channel", "buy", "contract_id", "high", "hold_amount", "last", "low", "sell", "unit_amount", "vol") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);')
 
         redis = Redis.new
