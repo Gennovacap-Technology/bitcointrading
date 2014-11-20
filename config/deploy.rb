@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'bitcoin-futures'
-set :repo_url, 'git@bitbucket.org:brunoasantos/bitcoin-futures.git'
+set :repo_url, 'git@github.com:Gennovacap-Technology/bitcointrading.git'
 
 # namespace :deploy do
 
