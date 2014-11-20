@@ -6,5 +6,6 @@ server '104.236.4.31', user: 'bitcoin', roles: %w{web app}
 
 set :ssh_options, {
   forward_agent: true,
-  port: 22
+  port: 22,
+  keys: '~/.ssh/id_rsa'
 }
