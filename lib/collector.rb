@@ -1,8 +1,8 @@
 require 'server'
 class Collector < Server
 
-  def self.run!(options)
-    Server.new(options).run! do
+  def self.run!
+    Server.new('collector').run! do
       EM.run do
         ws = Faye::WebSocket::Client.new('wss://real.okcoin.com:10440/websocket/okcoinapi')
         redis = Redis.new
