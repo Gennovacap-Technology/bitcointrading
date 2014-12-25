@@ -25,11 +25,11 @@ class Server
   end
 
   def run!
+    @log.redirect_output
     @pid.check
     daemonize
     @pid.write
     trap_signals
-    @log.redirect_output
 
     yield if block_given?
 
@@ -45,6 +45,17 @@ class Server
 
   def trap_signals
     trap(:QUIT) { @quit = true }
+  end
+
+  def self.restart_process(process)
+    path = File.expand_path(File.dirname(__FILE__))
+    new_path = path.split('/')[0..-2].join('/')
+    pidfile = File.join(new_path, 'tmp', "#{process}.pid")
+    Dir.chdir(new_path) do
+      File.delete(pidfile) if File.exists?(pidfile)
+      `ruby -Ilib bin/#{process}`
+    end
+    Process.exit!(true)
   end
 
 end

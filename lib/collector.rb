@@ -2,17 +2,12 @@ require 'server'
 class Collector < Server
 
   WS_URL = 'wss://real.okcoin.com:10440/websocket/okcoinapi'
-  PING = 5 # seconds
 
   def self.run!
     Server.new('collector').run! do
       EM.run do
         puts "starting EventMachine at #{Time.now}"
         @ws = nil
-
-        EM.add_timer(PING) do
-          start_websocket if @ws.nil?
-        end
       end
     end
   end
@@ -40,7 +35,7 @@ class Collector < Server
     @ws.on :close do |event|
       p [:close, event.code, event.reason, Time.now]
       @ws = nil
+      restart_process('collector')
     end
   end
-
 end
