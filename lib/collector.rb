@@ -8,6 +8,7 @@ class Collector < Server
       EM.run do
         puts "starting EventMachine at #{Time.now}"
         @ws = nil
+        start_websocket
       end
     end
   end

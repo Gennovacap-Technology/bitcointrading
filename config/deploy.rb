@@ -4,6 +4,8 @@ lock '3.2.1'
 set :application, 'bitcoin-futures'
 set :repo_url, 'git@github.com:Gennovacap-Technology/bitcointrading.git'
 
+set :linked_dirs, %w{log tmp}
+
 # namespace :deploy do
 
 #   desc 'Restart application'
